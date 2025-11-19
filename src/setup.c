@@ -6,13 +6,12 @@
 /*   By: tsignori <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 08:31:15 by tsignori          #+#    #+#             */
-/*   Updated: 2025/11/19 09:39:30 by tsignori         ###   ########.fr       */
+/*   Updated: 2025/11/19 14:30:31 by tsignori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/stat.h>
-#include <direct.h>
-#include <stdio.h>
+#include "fl_workspace.h" 
+#include "utils.h"
 
 int	init(char *path, int mode)
 {
@@ -26,17 +25,23 @@ int	init(char *path, int mode)
 		mkdir(fl_strjoin(path, "/bin/libs"), mode);
 		mkdir(fl_strjoin(path, "/bin/template"), mode);
 		mkdir(fl_strjoin(path, "/bin"), mode);
+		mkdir(fl_strjoin(path, "/config"), mode);
 		mkdir(fl_strjoin(path, "/projects"), mode);
-		return (0);
+		return (1);
 	}
 	else
 	{
-		printf("Fluid Workspace is already setup\nDo you want to reinstall ? [Y/n]");
+		printf("Fluid Workspace is already setup\nDo you want to reinstall ? [Y/n]\n");
 		scanf("%d", response);
-		if (response == 10 && response == 'Y' && response == 'y')
+		if (response == 10 || response == 'Y' || response == 'y')
 		{
-
-			// rm -rf le path folder;
+			printf("Are you sure ? All ur project gonna be deleted from local [Y/n]\n");
+			scanf("%d", response);
+			if (response == 10 || response == 'Y' || response == 'y')
+			{
+				system(fl_strjoin_sep("rm -rf", path, " "));
+				return (init(path, mode));
+			}
 		}
 		else
 			return (1);
