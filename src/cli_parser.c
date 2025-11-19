@@ -6,11 +6,14 @@
 /*   By: tsignori <tsignori@student.42perpignan.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 03:35:24 by tsignori          #+#    #+#             */
-/*   Updated: 2025/11/18 22:14:49 by tsignori         ###   ########.fr       */
+/*   Updated: 2025/11/19 07:52:08 by tsignori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "command.h"
+
+int	fl_strcmp(char *s1, char *s2);
 
 char	*set_action(char *act)
 {
@@ -18,7 +21,7 @@ char	*set_action(char *act)
 		return ("create\0");
 	if (fl_strcmp(act, "open"))
 		return ("open\0");
-	if (fl_strcmp(act, "edit"));
+	if (fl_strcmp(act, "edit"))
 		return "edit\0";
 	return ((void *)0);
 }
@@ -30,17 +33,18 @@ t_command	*set_command(char **cmd)
 	char		*proj;
 	t_command	*command;
 
-	act = set_action(*(++cmd));
+	act = set_action(*cmd);
 	proj = *(++cmd);
-	if (fl_strcmp(*(++av), "-l"))
+	lang = (void *)0;
+	if (fl_strcmp(*(++cmd), "-l"))
 	{
-		++av;
-		if (fl_strcmp(*av, "c"))
-			lang = *av;
-		if (fl_strcmp(*av, "csharp"))
-			lang = *av;
-		if (fl_strcmp(*av, "asm"))
-			lang = *av;
+		++cmd;
+		if (fl_strcmp(*cmd, "c"))
+			lang = *cmd;
+		if (fl_strcmp(*cmd, "csharp"))
+			lang = *cmd;
+		if (fl_strcmp(*cmd, "asm"))
+			lang = *cmd;
 	}
 	command = malloc(sizeof(t_command));
 	command->action = act;
