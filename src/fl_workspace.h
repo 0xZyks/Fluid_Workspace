@@ -6,7 +6,7 @@
 /*   By: tsignori <tsignori@student.42perpignan.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 14:02:53 by tsignori          #+#    #+#             */
-/*   Updated: 2025/11/19 14:06:54 by tsignori         ###   ########.fr       */
+/*   Updated: 2025/11/19 16:37:25 by tsignori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,5 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <sys/stat.h>
-# include <direct.h>
 
 #endif // !FL_WORKSPACE_H

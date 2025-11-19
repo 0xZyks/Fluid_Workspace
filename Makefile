@@ -3,81 +3,73 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tsignoroi <tsignori@student.42perpignan.fr +#+  +:+       +#+         #
+#    By: tsignori <tsignori@student.42perpignan.fr  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/08/06 14:50:25 by masanna           #+#    #+#              #
-#    Updated: 2025/11/19 07:42:40 by tsignori         ###   ########.fr        #
+#    Created: 2025/11/19 16:33:39 by tsignori          #+#    #+#              #
+#    Updated: 2025/11/19 16:36:58 by tsignori         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ################################################################################
-###
-##		CONFIG
-#
+### CONFIG
+################################################################################
 
-NAME			:=	gnl.a
+NAME        := gnl.a
 
-INC_DIR			:=	./includes/
-SRC_DIR			:=	./src
-OBJ_DIR			:=	obj
+SRC_DIR     := src
+OBJ_DIR     := obj
+INC_DIR     := includes
 
-CC				:=	cc
-CFLAGS			:=	-Wall -Wextra -Werror -I$(INC_DIR)
-
+CC          := cc
+CFLAGS      := -Wall -Wextra -Werror -I$(INC_DIR)
 
 ################################################################################
-###
-##		SOURCES / OBJECTS
-#
+### SOURCES / OBJECTS (AUTO)
+################################################################################
 
-SRC_FILES		:= \
-					cli_parser.c \
-					/utils/strcmp.c \
+# → récupère tous les .c, y compris dans les sous-dossiers
+SRC_FILES   := $(shell find $(SRC_DIR) -type f -name "*.c")
 
-OBJ_FILES		:=	$(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
-
+# → remplace src/xxx.c par obj/xxx.o automatiquement
+OBJ_FILES   := $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC_FILES))
 
 ################################################################################
-###
-##		FORMATTING
-#
+### COLORS
+################################################################################
 
-RESET			:=	\033[0m
-BOLD			:=	\033[1m
-ITALIC			:=	\033[3m
+RESET		:=	\033[0m
+BOLD		:=	\033[1m
+ITALIC		:=	\033[3m
 
-RED				:=	\033[1;31m
-GREEN			:=	\033[1;32m
-YELLOW			:=	\033[1;33m
-BLUE			:=	\033[1;34m
-CYAN			:=	\033[1;36m
-
+RED			:=	\033[1;31m
+GREEN		:=	\033[1;32m
+YELLOW		:=	\033[1;33m
+BLUE		:=	\033[1;34m
+CYAN		:=	\033[1;36m
 
 ################################################################################
-###
-##		RULES
-#
+### RULES
+################################################################################
 
 all: $(NAME)
 
 $(NAME): $(OBJ_FILES)
-	@echo "[AR] - $@"
+	@echo "$(GREEN)[AR]$(RESET) - $@"
 	@ar rcs $@ $^
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@echo "[CC] - $<"
+	@echo "$(BLUE)[CC]$(RESET) - $<"
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@rm -rf $(OBJ_DIR)
-	@echo "[RM] - $(OBJ_DIR)"
+	@echo "$(RED)[RM]$(RESET) - $(OBJ_DIR)"
 
 fclean: clean
-	@echo "[RM] - $(NAME)"
 	@rm -f $(NAME)
+	@echo "$(RED)[RM]$(RESET) - $(NAME)"
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus
-
+.PHONY: all clean fclean re
