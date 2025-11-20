@@ -6,7 +6,7 @@
 /*   By: tsignori <tsignori@student.42perpignan.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 23:07:41 by tsignori          #+#    #+#             */
-/*   Updated: 2025/11/17 23:28:10 by tsignori         ###   ########.fr       */
+/*   Updated: 2025/11/20 08:39:40 by tsignori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,5 @@ int	display_error(int flag)
 		printf("	-fluid --config-edit <proj_name> To edit project configuration\n");
 		return (0);
 	}
-	return (0);
-}
-
-int	main(int ac, char **av)
-{
-	if (ac == 1)
-		return (display_error(0));
-	char	*cmd = *(++av);
-	printf("%s\n", cmd);
-	if (!get_cmd(cmd))
-		return (display_error(1));
-	char	*current = get_cmd(cmd);
-	printf("%s\n", current);
 	return (0);
 }
