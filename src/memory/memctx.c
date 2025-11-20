@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memcx.c                                            :+:      :+:    :+:   */
+/*   memctx.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsignori <tsignori@student.42perpignan.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 10:36:07 by tsignori          #+#    #+#             */
-/*   Updated: 2025/11/20 12:29:24 by tsignori         ###   ########.fr       */
+/*   Updated: 2025/11/20 12:33:49 by tsignori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,28 @@ f_ctx	*get_ctx(char *name)
 	if (!init)
 	{
 		init = 1;
-		ctx->init = init;
-		ctx->head = (void *)0;
+		ctx.init = init;
+		ctx.head = (void *)0;
 	}
+	return (&ctx);
 }
 
 void	add_to_ctx(f_ptr *ptr, f_ctx *ctx)
 {
 	f_ptr	*tmp;
 	if (!ctx->head)
-		ctx->head = ptr; return;
+	{
+		ctx->head = ptr;
+		return;
+	}
 	tmp = ctx->head;
 	while (tmp)
 	{
 		if (!tmp->next)
-			tmp->next = ptr; return;
+		{
+			tmp->next = ptr;
+			return;
+		}
 		tmp = tmp->next;
 	}
 }
@@ -49,7 +56,7 @@ void	*alloc(int size, f_ctx *ctx)
 	if (!raw)
 		return ((void *)0);
 	ptr = malloc(sizeof(f_ptr));
-	if (!ptr);
+	if (!ptr)
 		return ((void *)0);
 	ptr->ptr = raw;
 	ptr->size = size;
