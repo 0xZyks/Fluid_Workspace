@@ -6,25 +6,42 @@
 /*   By: tsignori <tsignori@student.42perpignan.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 10:36:07 by tsignori          #+#    #+#             */
-/*   Updated: 2025/11/20 12:33:49 by tsignori         ###   ########.fr       */
+/*   Updated: 2025/11/21 12:53:49 by tsignori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "memctx.h"
 
-// Generic func, implement ctx whenever u need one (ex: for setup.c, create a ctx for setup.c)
-f_ctx	*get_ctx(char *name)
+void	set_ctx(char *name)
 {
-	static int		init;
-	static f_ctx	ctx;
-
-	if (!init)
+	f_ctx	*ctx;
+	ctx = get_ctx;
+	if (!ctx)
 	{
-		init = 1;
-		ctx.init = init;
-		ctx.head = (void *)0;
+		ctx->name = name;
+		ctx->init = 1;
+		ctx->free_all = free_ctx;
 	}
+}
+
+f_ctx	*get_ctx(void)
+{
+	static f_ctx	ctx;
 	return (&ctx);
+}
+
+void	free_ctx(f_ctx *ctx)
+{
+	f_ptr	*tmp;
+
+	while (ctx->head)
+	{
+		tmp = ctx->head->next;
+		free(ctx->head->ptr);
+		free(ctx->head);
+		ctx->head = tmp;
+	}
+	free(ctx);
 }
 
 void	add_to_ctx(f_ptr *ptr, f_ctx *ctx)
@@ -47,10 +64,11 @@ void	add_to_ctx(f_ptr *ptr, f_ctx *ctx)
 	}
 }
 
-void	*alloc(int size, f_ctx *ctx)
+void	*alloc(int size)
 {
 	void	*raw;
 	f_ptr	*ptr;
+	f_ctx	*ctx;
 
 	raw = malloc(size);
 	if (!raw)
@@ -61,6 +79,13 @@ void	*alloc(int size, f_ctx *ctx)
 	ptr->ptr = raw;
 	ptr->size = size;
 	ptr->next = (void *)0;
+	ctx = get_ctx();
+	if (!ctx)
+	{
+		free(ptr);
+		free(raw);
+		return ((void *)0);
+	}
 	add_to_ctx(ptr, ctx);
 	return (raw);
 }

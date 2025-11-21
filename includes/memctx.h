@@ -6,7 +6,7 @@
 /*   By: tsignori <tsignori@student.42perpignan.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 09:44:31 by tsignori          #+#    #+#             */
-/*   Updated: 2025/11/20 12:45:42 by tsignori         ###   ########.fr       */
+/*   Updated: 2025/11/21 12:52:04 by tsignori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,13 @@ typedef struct s_memctx {
 	int		init;
 	char	*name;
 	f_ptr	*head;
+	void	(*free_all)(struct s_memctx *ctx);
 }	f_ctx;
 
 void	*alloc(int size, f_ctx *ctx);
+void	set_ctx(char *name);
+void	*alloc(int size);
+f_ctx	*get_gtx(void);
+
 
 #endif // !MEMCTX_H
