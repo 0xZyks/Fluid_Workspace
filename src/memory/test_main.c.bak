@@ -1,0 +1,52 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tsignori <tsignori@student.42perpignan.fr  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/21 14:42:51 by tsignori          #+#    #+#             */
+/*   Updated: 2025/11/21 15:11:08 by tsignori         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "memctx.h"
+
+int	fl_strlen(char *s)
+{
+	int	index = 0;
+	while (*(s + (++index))) ;
+	return (index);
+}
+
+char	*fl_strdup(char *src)
+{
+	int		index;
+	char	*dest;
+
+	dest = alloc(fl_strlen(src) + 1);
+	index = -1;
+	while (*src)
+		dest[++index] = *src++;
+	dest[++index] = '\0';
+	return (dest);
+}
+
+int	main(int ac, char **av)
+{
+	if (ac != 2)
+		return (printf("Bad use, try : ./a.out <str>"));
+	set_ctx("main");
+	char	*src = *(++av);
+	char	*dst1 = fl_strdup(src);
+	char	*dst2 = fl_strdup("Coucou");
+	char	*dst3 = fl_strdup("Feur");
+	f_ctx	*ctx = get_ctx();
+
+	printf("%s\n", ctx->name);
+	printf("%s\n", dst1);
+	printf("%s\n", dst2);
+	printf("%s\n", dst3);
+	ctx->free_all(ctx);
+	return (0);
+}

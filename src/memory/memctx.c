@@ -6,7 +6,7 @@
 /*   By: tsignori <tsignori@student.42perpignan.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 10:36:07 by tsignori          #+#    #+#             */
-/*   Updated: 2025/11/21 12:53:49 by tsignori         ###   ########.fr       */
+/*   Updated: 2025/11/21 15:11:29 by tsignori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	set_ctx(char *name)
 {
 	f_ctx	*ctx;
-	ctx = get_ctx;
-	if (!ctx)
+	ctx = get_ctx();
+	if (!ctx->init)
 	{
 		ctx->name = name;
 		ctx->init = 1;
@@ -33,15 +33,17 @@ f_ctx	*get_ctx(void)
 void	free_ctx(f_ctx *ctx)
 {
 	f_ptr	*tmp;
+	void	*tmp_ptr;
 
 	while (ctx->head)
 	{
 		tmp = ctx->head->next;
+		tmp_ptr = ctx->head->ptr;
+		printf("Free %p - Value: %s in %s Context\n", tmp_ptr, (char *)tmp_ptr, ctx->name);
 		free(ctx->head->ptr);
 		free(ctx->head);
 		ctx->head = tmp;
 	}
-	free(ctx);
 }
 
 void	add_to_ctx(f_ptr *ptr, f_ctx *ctx)
