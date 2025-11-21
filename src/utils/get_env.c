@@ -6,7 +6,7 @@
 /*   By: tsignori <tsignori@student.42perpignan.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 12:04:25 by tsignori          #+#    #+#             */
-/*   Updated: 2025/11/19 12:04:36 by tsignori         ###   ########.fr       */
+/*   Updated: 2025/11/21 15:53:19 by tsignori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,4 @@ char	*get_env(void)
 		return ((void *)0);
 	home = fl_strjoin(home, "/");
 	return (home);
-}
-
-int	main(void)
-{
-	printf("%s\n", get_env());
-	return (0);
 }

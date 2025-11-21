@@ -6,11 +6,12 @@
 /*   By: tsignori <tsignori@student.42perpignan.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 12:04:52 by tsignori          #+#    #+#             */
-/*   Updated: 2025/11/19 12:04:54 by tsignori         ###   ########.fr       */
+/*   Updated: 2025/11/21 15:53:07 by tsignori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
+#include "memctx.h"
 
 char	*fl_strjoin(char *s1, char *s2)
 {
@@ -22,7 +23,7 @@ char	*fl_strjoin(char *s1, char *s2)
 	if (!s1 || !s2)
 		return ((void *)0);
 	tlen = fl_strlen(s1) + fl_strlen(s2);
-	res = malloc(tlen + 1);
+	res = alloc(tlen + 1);
 	if (!res)
 		return ((void *)0);
 	index = -1;

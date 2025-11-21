@@ -6,11 +6,12 @@
 /*   By: tsignori <tsignori@student.42perpignan.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 13:44:46 by tsignori          #+#    #+#             */
-/*   Updated: 2025/11/19 14:58:42 by tsignori         ###   ########.fr       */
+/*   Updated: 2025/11/21 15:52:47 by tsignori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
+#include "memctx.h"
 
 static int	add_wrd(char *dest, char *src, int buffer)
 {
@@ -31,7 +32,7 @@ char  *fl_strjoin_sep(char *s1, char* s2, char *set)
 	if (!s1 || !s2 || !set)
 		return ((void *)0);
 	tlen = fl_strlen(s1) + fl_strlen(s2) + fl_strlen(set);
-	res = malloc(tlen + 1);
+	res = alloc(tlen + 1);
 	if (!res)
 		return ((void *)0);
 	buff = -1;

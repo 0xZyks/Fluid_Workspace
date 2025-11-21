@@ -6,24 +6,12 @@
 /*   By: tsignori <tsignori@student.42perpignan.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 12:04:34 by tsignori          #+#    #+#             */
-/*   Updated: 2025/11/21 12:24:17 by tsignori         ###   ########.fr       */
+/*   Updated: 2025/11/21 15:52:11 by tsignori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fl_workspace.h" 
 #include "utils.h"
-
-f_ctx	*get_ctx(void)
-{
-	static f_ctx	ctx;
-	static int		init;
-	
-	if (!init)
-	{
-		init = 1;
-	}
-	return (&ctx);
-}
 
 int	create_config(char *path)
 {
