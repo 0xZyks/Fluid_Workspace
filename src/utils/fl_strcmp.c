@@ -6,11 +6,11 @@
 /*   By: tsignori <tsignori@student.42perpignan.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 03:31:57 by tsignori          #+#    #+#             */
-/*   Updated: 2025/11/19 07:43:23 by tsignori         ###   ########.fr       */
+/*   Updated: 2025/11/24 17:12:58 by tsignori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+//#include "utils.h"
 
 int	fl_strcmp(char *s1, char *s2)
 {

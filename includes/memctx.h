@@ -6,12 +6,12 @@
 /*   By: tsignori <tsignori@student.42perpignan.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 09:44:31 by tsignori          #+#    #+#             */
-/*   Updated: 2025/11/21 14:49:32 by tsignori         ###   ########.fr       */
+/*   Updated: 2025/11/22 15:09:11 by tsignori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MEMCTX_H
-# define #MEMCTX_H
+# define MEMCTX_H
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -33,7 +33,7 @@ typedef struct s_memctx {
 void	set_ctx(char *name);
 void	*alloc(int size);
 void	free_ctx(f_ctx *ctx);
-f_ctx	*get_gtx(void);
+f_ctx	*get_ctx(void);
 
 
 #endif // !MEMCTX_H
